@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Confirm your email and instantly win a $800 shopping reward!</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Confirm your email and instantly win a $800 shopping reward! Live counter, countdown, and 50 real user reviews.">
+  <style>
+    :root {
+      --primary: #1e3c72;
+      --secondary: #2a5298;
+      --accent: #ffca28;
+      --cta-iphone: #27ae60;
+      --cta-android: #2980b9;
+      --cta-hover: #1abc9c;
+      --star: #ffca28;
+      --bg: #f6f9fc;
+      --card-bg: #fff;
+      --text: #222;
+      --shadow: 0 2px 16px rgba(30,60,114, 0.07), 0 1.5px 6px rgba(30,60,114,0.04);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--bg);
+      font-family: 'Segoe UI', 'Arial', sans-serif;
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+
+    header {
+      background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+      color: #fff;
+      padding: 2rem 1rem 1.2rem 1rem;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+
+    header h1 {
+      font-size: 1.7rem;
+      font-weight: 700;
+      margin-bottom: 0.7rem;
+      letter-spacing: 0.01em;
+    }
+
+    .counters {
+      display: flex;
+      justify-content: center;
+      gap: 2.5rem;
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+    }
+
+    .counter-box {
+      background: rgba(0,0,0,0.08);
+      padding: 0.7rem 1.6rem;
+      border-radius: 1.5rem;
+      box-shadow: 0 1px 4px rgba(30,60,114, 0.07);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .timer {
+      letter-spacing: 0.08em;
+      font-size: 1.1em;
+    }
+
+    .cta-container {
+      margin: 2.5rem 0 2rem 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.2rem;
+    }
+
+    .cta-btn {
+      min-width: 220px;
+      padding: 1rem 2.5rem;
+      font-size: 1.18rem;
+      font-weight: 700;
+      color: #fff;
+      border: none;
+      border-radius: 2.5rem;
+      cursor: pointer;
+      margin: 0.3rem 0;
+      box-shadow: var(--shadow);
+      letter-spacing: 0.03em;
+      transition: background 0.18s, transform 0.13s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6em;
+      outline: none;
+    }
+    .cta-btn.iphone {
+      background: linear-gradient(90deg, var(--cta-iphone), #43e97b);
+    }
+    .cta-btn.android {
+      background: linear-gradient(90deg, var(--cta-android), #6dd5fa);
+    }
+    .cta-btn:hover {
+      background: var(--cta-hover);
+      transform: translateY(-2px) scale(1.025);
+    }
+
+    .reviews-section {
+      background: #fff;
+      box-shadow: var(--shadow);
+      border-radius: 20px;
+      margin: 2rem auto 1.5rem auto;
+      max-width: 900px;
+      padding: 2.2rem 1.1rem 1.7rem 1.1rem;
+    }
+    .reviews-section h2 {
+      text-align: center;
+      font-size: 1.4rem;
+      margin-bottom: 1.5rem;
+      color: var(--primary);
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+    .reviews-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.3rem 2rem;
+      max-height: 560px;
+      overflow-y: auto;
+      padding-right: 0.5rem;
+    }
+    .review-card {
+      background: var(--card-bg);
+      border-radius: 13px;
+      box-shadow: 0 1px 7px rgba(30,60,114, 0.05);
+      padding: 1.2rem 1rem 1.05rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+    .review-header {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      margin-bottom: 0.12rem;
+    }
+    .review-name {
+      font-weight: 600;
+      font-size: 1.02em;
+      color: var(--secondary);
+    }
+    .review-stars {
+      color: var(--star);
+      font-size: 1.1em;
+      margin-top: 1px;
+    }
+    .review-text {
+      font-size: 1em;
+      color: #333;
+    }
+
+    @media (max-width: 800px) {
+      .reviews-list {
+        grid-template-columns: 1fr;
+        max-height: 750px;
+      }
+      .reviews-section {
+        padding: 1.4rem 0.3rem 1.2rem 0.3rem;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .counters {
+        flex-direction: column;
+        gap: 0.7rem;
+      }
+      .cta-btn {
+        min-width: 0;
+        width: 100%;
+        font-size: 1rem;
+      }
+      .reviews-section {
+        margin: 1.2rem auto 1.2rem auto;
+        padding: 1rem 0.1rem 1rem 0.1rem;
+      }
+    }
+
+    /* Custom scrollbar for reviews */
+    .reviews-list::-webkit-scrollbar {
+      width: 6px;
+      background: #eee;
+      border-radius: 8px;
+    }
+    .reviews-list::-webkit-scrollbar-thumb {
+      background: #ccc;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Confirm your email and instantly win a $800 shopping reward!</h1>
+    <div class="counters">
+      <div class="counter-box">
+        <span>Live viewers:</span>
+        <span id="viewers-counter">—</span>
+      </div>
+      <div class="counter-box timer">
+        <span>Offer expires in:</span>
+        <span id="countdown-timer">05:00</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="cta-container">
+      <button class="cta-btn iphone" id="cta-iphone" type="button">
+        <svg width="24" height="24" fill="none" style="vertical-align: middle; margin-right:8px;" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="5" fill="#fff"/><rect x="5" y="2" width="14" height="20" rx="3" fill="#222"/><rect x="7" y="4" width="10" height="16" rx="2" fill="#e0e0e0"/><circle cx="12" cy="19" r="1" fill="#222"/></svg>
+        Continue on iPhone
+      </button>
+      <button class="cta-btn android" id="cta-android" type="button">
+        <svg width="24" height="24" fill="none" style="vertical-align: middle; margin-right:8px;" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="5" fill="#fff"/><rect x="4" y="3" width="16" height="18" rx="4" fill="#222"/><rect x="7" y="6" width="10" height="12" rx="2" fill="#e0e0e0"/><circle cx="8.5" cy="19" r="0.7" fill="#222"/><circle cx="15.5" cy="19" r="0.7" fill="#222"/></svg>
+        Continue on Android
+      </button>
+    </div>
+    <section class="reviews-section">
+      <h2>What our users say</h2>
+      <div class="reviews-list" id="reviews-list">
+        <!-- Reviews go here -->
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // --- Live viewer counter logic ---
+    function randomInt(min, max) {
+      return Math.floor(Math.random() * (max - min + 1) + min);
+    }
+    let viewers = randomInt(1000, 1500);
+    function updateViewers() {
+      // Simulate slight fluctuations
+      const change = randomInt(-7, 7);
+      viewers = Math.max(1000, Math.min(1500, viewers + change));
+      document.getElementById('viewers-counter').textContent = viewers.toLocaleString();
+    }
+    updateViewers();
+    setInterval(updateViewers, 3000);
+
+    // --- Countdown timer logic ---
+    let timeLeft = 5 * 60; // 5 minutes in seconds
+    const timerElem = document.getElementById('countdown-timer');
+    function updateTimer() {
+      let min = Math.floor(timeLeft / 60);
+      let sec = timeLeft % 60;
+      timerElem.textContent = `${min.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
+      if (timeLeft > 0) {
+        timeLeft--;
+      } else {
+        // Optionally disable CTAs or show offer expired
+        document.getElementById('cta-iphone').disabled = true;
+        document.getElementById('cta-android').disabled = true;
+        timerElem.textContent = '00:00';
+      }
+    }
+    updateTimer();
+    const timerInterval = setInterval(updateTimer, 1000);
+
+    // --- CTA buttons: dynamic clickid param ---
+    function getClickID() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get('clickid') || '';
+    }
+
+    function buildLink(base, clickid) {
+      if (!clickid) return base;
+      // If URL already has parameters
+      return base + (base.includes('?') ? '&' : '?') + 's1=' + encodeURIComponent(clickid);
+    }
+
+    document.getElementById('cta-iphone').addEventListener('click', function() {
+      const clickid = getClickID();
+      const link = buildLink('https://singingfiles.com/show.php?l=0&u=1159972&id=68777', clickid);
+      window.location.href = link;
+    });
+    document.getElementById('cta-android').addEventListener('click', function() {
+      const clickid = getClickID();
+      const link = buildLink('https://singingfiles.com/show.php?l=0&u=1159972&id=68776', clickid);
+      window.location.href = link;
+    });
+
+    // --- 50 User reviews ---
+    const reviewsData = [
+      { name: "Emily R.", msg: "Got my $800 shopping reward! Totally legit!" },
+      { name: "Jake M.", msg: "I confirmed my email and got rewarded. Super fast!" },
+      { name: "Sofia K.", msg: "Didn’t expect it to work, but I got the reward!" },
+      { name: "Leo D.", msg: "Best surprise ever. Thank you!" },
+      { name: "Amelia W.", msg: "Real offer. Easy and quick to claim." },
+      { name: "Liam S.", msg: "Just received my gift card. Amazing!" },
+      { name: "Olivia J.", msg: "No scam here! It actually works!" },
+      { name: "Noah B.", msg: "Legit site. Claimed and received my reward!" },
+      { name: "Ava C.", msg: "This is crazy. $800 reward instantly!" },
+      { name: "Mason T.", msg: "I thought it was fake, but it’s real!" },
+      { name: "Isabella H.", msg: "I love how quick and simple this was!" },
+      { name: "Ethan G.", msg: "Claimed the offer in 2 minutes. Legit!" },
+      { name: "Mia P.", msg: "Perfect timing. Shopping made easy!" },
+      { name: "Lucas L.", msg: "100% real. Got the email and the reward." },
+      { name: "Charlotte F.", msg: "Highly recommended! It actually works." },
+      { name: "Logan E.", msg: "Free money just by confirming email? Yes!" },
+      { name: "Harper V.", msg: "Instant access to the gift reward!" },
+      { name: "Elijah Z.", msg: "I never trust offers, but this one worked." },
+      { name: "Abigail N.", msg: "Confirmed and got $800 reward. Unbelievable!" },
+      { name: "James D.", msg: "It felt like a dream. Best reward ever!" },
+      { name: "Ella M.", msg: "They really gave the shopping credit!" },
+      { name: "Benjamin W.", msg: "Wow, that was too easy!" },
+      { name: "Scarlett Q.", msg: "I shared this with all my friends!" },
+      { name: "Henry Y.", msg: "This is the only offer that worked for me." },
+      { name: "Grace K.", msg: "I got my $800 and already spent it!" },
+      { name: "Alexander I.", msg: "Simple, clean and fast — love it!" },
+      { name: "Chloe X.", msg: "Tried this just for fun. I actually won!" },
+      { name: "Daniel U.", msg: "Email confirm = shopping reward. Magic!" },
+      { name: "Aria O.", msg: "Real people, real reward. Thank you!" },
+      { name: "Matthew S.", msg: "My favorite offer site by far." },
+      { name: "Layla A.", msg: "Totally satisfied. Reward arrived instantly." },
+      { name: "Sebastian M.", msg: "My account was credited in minutes!" },
+      { name: "Zoe L.", msg: "Great experience. Real offer. Real result." },
+      { name: "Jackson C.", msg: "I was skeptical, but it paid off." },
+      { name: "Riley H.", msg: "Best $800 I've ever earned!" },
+      { name: "Aiden G.", msg: "No hassle, no scam. Just real value." },
+      { name: "Lily T.", msg: "Saw it on Facebook, clicked, and claimed!" },
+      { name: "David N.", msg: "Best reward program out there." },
+      { name: "Hannah J.", msg: "Awesome! Highly recommend this." },
+      { name: "Joseph F.", msg: "Super smooth and fast process." },
+      { name: "Nora R.", msg: "They delivered exactly what they promised." },
+      { name: "Samuel B.", msg: "Easiest reward I’ve ever claimed!" },
+      { name: "Ellie E.", msg: "Even my sister claimed hers!" },
+      { name: "Carter D.", msg: "Fastest reward claim ever!" },
+      { name: "Addison K.", msg: "Very real. Very worth it!" },
+      { name: "Wyatt Q.", msg: "I used it twice already!" },
+      { name: "Aubrey Z.", msg: "Love it. It actually works!" },
+      { name: "Jayden V.", msg: "100% trusted site!" },
+      { name: "Penelope Y.", msg: "It gave me $800 in value!" },
+      { name: "Lillian O.", msg: "Amazing offer. Worked like a charm." }
+    ];
+
+    function renderReviews() {
+      const reviewsList = document.getElementById('reviews-list');
+      reviewsData.forEach((r) => {
+        const card = document.createElement('div');
+        card.className = 'review-card';
+        card.innerHTML = `
+          <div class="review-header">
+            <span class="review-name">${r.name}</span>
+            <span class="review-stars">★★★★★</span>
+          </div>
+          <div class="review-text">${r.msg}</div>
+        `;
+        reviewsList.appendChild(card);
+      });
+    }
+    renderReviews();
+  </script>
+</body>
+</html>
+```
